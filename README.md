@@ -1,7 +1,3 @@
-Here's how the README file would look for a project named **Resume Builder**:
-
----
-
 # Resume Builder
 
 **Resume Builder** is a web application built with React and Redux that allows users to create professional resumes using customizable templates and export them as PDF files.
