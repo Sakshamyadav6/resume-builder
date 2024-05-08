@@ -5,8 +5,9 @@ export default {
     extend: {
       colors: {
         primary: "rgb(251 191 36)",
+        background: "rgb(16, 16, 20)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
