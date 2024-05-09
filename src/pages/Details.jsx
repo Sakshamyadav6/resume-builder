@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import FormSteps from "../components/FormSteps";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { details } from "../slice/detailSlice";
 
 const Details = () => {
   const [firstName, setfirstName] = useState("");
@@ -10,11 +12,19 @@ const Details = () => {
   const [address, setaddress] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(firstName);
+    const userDetails = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      address: address,
+    };
+    dispatch(details(userDetails));
 
     navigate("/experiences");
   };
@@ -25,10 +35,17 @@ const Details = () => {
         <div className="mb-4">
           <FormSteps step1 />
         </div>
-
         <h1 className="text-3xl font-bold mt-2 mb-2 tracking-widest">
           Personal Details
         </h1>
+        <div className="relative lg:right-96  right-32 mb-4 lg:mb-0">
+          <button
+            type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            <i className="fa-solid fa-backward right-96"></i>
+          </button>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row">
             <div class="relative mx-3 my-3">
@@ -69,7 +86,7 @@ const Details = () => {
               <input
                 type="number"
                 id="floating_PhoneNumber"
-                onClick={(e) => setphoneNumber(e.target.value)}
+                onChange={(e) => setphoneNumber(e.target.value)}
                 required
                 class="block px-3.5 pb-2.5 pt-4 w-full text-base text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
@@ -85,7 +102,7 @@ const Details = () => {
               <input
                 type="email"
                 id="floating_email"
-                onClick={(e) => setemail(e.target.value)}
+                onChange={(e) => setemail(e.target.value)}
                 required
                 class="block px-2.5 pb-2.5 pt-4 w-full text-base text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
@@ -103,7 +120,7 @@ const Details = () => {
               <input
                 type="text"
                 id="floating_address"
-                onClick={(e) => setaddress(e.target.value)}
+                onChange={(e) => setaddress(e.target.value)}
                 required
                 class="block px-3.5 pb-2.5 pt-4 w-full text-base text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
