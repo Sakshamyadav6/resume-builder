@@ -28,6 +28,10 @@ const Details = () => {
 
     navigate("/experiences");
   };
+  const backButton = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
 
   return (
     <>
@@ -41,7 +45,8 @@ const Details = () => {
         <div className="relative lg:right-96  right-32 mb-4 lg:mb-0">
           <button
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={backButton}
+            class="text-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
           >
             <i className="fa-solid fa-backward right-96"></i>
           </button>
@@ -136,7 +141,7 @@ const Details = () => {
           <div className="flex flex-col md:flex-col mt-5 w-full">
             <button
               type="submit"
-              class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Next
             </button>
