@@ -16,29 +16,129 @@ const Experiences = () => {
 
     console.log("first");
 
-    const newinputForms = [
+    const newInputForms = [
       ...inputForms,
       <InputForms key={inputForms.length} />,
     ];
-    setInputForms(newinputForms);
+    setInputForms(newInputForms);
+  };
+
+  const handleDelete = (indexToDelete) => {
+    const updatedForms = inputForms.filter(
+      (_, index) => index !== indexToDelete
+    );
+    setInputForms(updatedForms);
   };
   const InputForms = ({ index }) => {
     return (
-      <div className="mb-5" key={index}>
-        <label
-          htmlFor={`large-input-${index}`}
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Large input
-        </label>
-        <input
-          type="text"
-          id={`large-input-${index}`}
-          className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-      </div>
+      <>
+        <div className="flex flex-col md:flex-row w-full">
+          <div className="mb-5 mr-4 flex-grow" key={index}>
+            <label
+              htmlFor={`job-title-${index}`}
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Job Title
+            </label>
+            <input
+              type="text"
+              id={`job-title-${index}`}
+              className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="mb-5 flex-grow" key={index}>
+            <label
+              htmlFor={`employer-${index}`}
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Employer
+            </label>
+            <input
+              type="text"
+              id={`employer-${index}`}
+              className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row w-full">
+          <div className="mb-5 mr-4 flex-grow" key={index}>
+            <label
+              htmlFor={`start-date-${index}`}
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Start Date
+            </label>
+            <input
+              type="date"
+              id={`start-date-${index}`}
+              className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="mb-5 flex-grow" key={index}>
+            <label
+              htmlFor={`end-date-${index}`}
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              End Date
+            </label>
+            <input
+              type="date"
+              id={`end-date-${index}`}
+              className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="mb-5 md:ml-4 flex-grow" key={index}>
+            <label
+              htmlFor={`location-${index}`}
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Currently Working
+            </label>
+            <select className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+        <div className="mb-5 flex-grow" key={index}>
+          <label
+            htmlFor={`location-${index}`}
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Location
+          </label>
+          <input
+            type="text"
+            id={`location-${index}`}
+            className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+        <div className="mb-5 flex-grow" key={index}>
+          <label
+            htmlFor={`location-${index}`}
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Description
+          </label>
+          <textarea
+            type="text"
+            id={`location-${index}`}
+            className="block w-full p-3 h-40 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+        <div>
+          <button
+            type="button"
+            onClick={() => handleDelete(index)}
+            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+          >
+            Delete
+          </button>
+        </div>
+      </>
     );
   };
+
   return (
     <>
       <div className="flex flex-col items-center mt-9">
@@ -48,7 +148,7 @@ const Experiences = () => {
         <h1 className="text-3xl font-bold mt-2 mb-2 tracking-widest">
           Experiences
         </h1>
-        <div className="relative lg:right-96  right-32 mb-4 lg:mb-0">
+        <div className="relative lg:right-96 right-32 mb-4 lg:mb-0">
           <button
             type="button"
             onClick={backButton}
