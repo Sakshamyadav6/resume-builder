@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import FormSteps from "../components/FormSteps";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid"; // Import UUID library
 
 const Experiences = () => {
   const [inputForms, setInputForms] = useState([]);
+
   const navigate = useNavigate();
 
   const backButton = (e) => {
@@ -13,83 +15,86 @@ const Experiences = () => {
 
   const addInput = (e) => {
     e.preventDefault();
-
+    // const id = uuidv4(); // Generate a unique ID
+    const id = inputForms.length;
+    console.log(id);
     console.log("first");
 
     const newInputForms = [
       ...inputForms,
-      <InputForms key={inputForms.length} />,
+      <InputForms key={id} id={id} handleDelete={handleDelete} />,
     ];
     setInputForms(newInputForms);
   };
 
-  const handleDelete = (indexToDelete) => {
-    const updatedForms = inputForms.filter(
-      (_, index) => index !== indexToDelete
-    );
+  const handleDelete = (idToDelete) => {
+    console.log(idToDelete);
+    const updatedForms = inputForms.filter((form) => form.id !== idToDelete);
+    console.log(updatedForms);
+
     setInputForms(updatedForms);
   };
-  const InputForms = ({ index }) => {
+  const InputForms = ({ id }) => {
     return (
       <>
         <div className="flex flex-col md:flex-row w-full">
-          <div className="mb-5 mr-4 flex-grow" key={index}>
+          <div className="mb-5 mr-4 flex-grow" key={`${id}+jobTitle`}>
             <label
-              htmlFor={`job-title-${index}`}
+              htmlFor={`job-title-${id}+title`}
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Job Title
             </label>
             <input
               type="text"
-              id={`job-title-${index}`}
+              id={`job-title-${id}+title`}
               className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
-          <div className="mb-5 flex-grow" key={index}>
+          <div className="mb-5 flex-grow" key={`${id}+jobEmployer`}>
             <label
-              htmlFor={`employer-${index}`}
+              htmlFor={`employer-${id}+employer`}
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Employer
             </label>
             <input
               type="text"
-              id={`employer-${index}`}
+              id={`employer-${id}+employer`}
               className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
         </div>
         <div className="flex flex-col md:flex-row w-full">
-          <div className="mb-5 mr-4 flex-grow" key={index}>
+          <div className="mb-5 mr-4 flex-grow" key={`${id}+jobDate`}>
             <label
-              htmlFor={`start-date-${index}`}
+              htmlFor={`start-date-${id}+startDate`}
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Start Date
             </label>
             <input
               type="date"
-              id={`start-date-${index}`}
+              id={`start-date-${id}+startDate`}
               className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
-          <div className="mb-5 flex-grow" key={index}>
+          <div className="mb-5 flex-grow" key={`${id}+jobendDate`}>
             <label
-              htmlFor={`end-date-${index}`}
+              htmlFor={`end-date-${id}+endDate`}
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               End Date
             </label>
             <input
               type="date"
-              id={`end-date-${index}`}
+              id={`end-date-${id}+endDate`}
               className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
-          <div className="mb-5 md:ml-4 flex-grow" key={index}>
+          <div className="mb-5 md:ml-4 flex-grow" key={`${id}+jobCurrent`}>
             <label
-              htmlFor={`location-${index}`}
+              htmlFor={`working-${id}+currentlyWorking`}
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Currently Working
@@ -100,37 +105,37 @@ const Experiences = () => {
             </select>
           </div>
         </div>
-        <div className="mb-5 flex-grow" key={index}>
+        <div className="mb-5 flex-grow" key={`${id}+jobLocation`}>
           <label
-            htmlFor={`location-${index}`}
+            htmlFor={`location-${id}+location`}
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Location
           </label>
           <input
             type="text"
-            id={`location-${index}`}
+            id={`location-${id}+location`}
             className="block w-full text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
-        <div className="mb-5 flex-grow" key={index}>
+        <div className="mb-5 flex-grow" key={`${id}+jobDesc`}>
           <label
-            htmlFor={`location-${index}`}
+            htmlFor={`desc-${id}`}
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Description
           </label>
           <textarea
             type="text"
-            id={`location-${index}`}
+            id={`desc-${id}`}
             className="block w-full p-3 h-40 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
         <div>
           <button
             type="button"
-            onClick={() => handleDelete(index)}
-            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+            onClick={() => handleDelete(id)}
+            className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
           >
             Delete
           </button>
@@ -169,8 +174,8 @@ const Experiences = () => {
           </div>
 
           <div>
-            {inputForms.map((form, index) => (
-              <React.Fragment key={index}>{form}</React.Fragment>
+            {inputForms.map((form, id) => (
+              <React.Fragment key={id}>{form}</React.Fragment>
             ))}
           </div>
 
